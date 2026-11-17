@@ -51,14 +51,19 @@ print(f"Cantidad de registros atípicos (extremo superior): {len(outliers)} ({po
 
 # Comparativa por aglomerado
 print("\n--- COMPARATIVA POR AGLOMERADO ---")
+
+# Mapeo para que la consola imprima los nombres legibles
+dicc_aglo = {32: 'CABA', 2: 'Gran La Plata'}
+ocupados['NOMBRE_AGLO'] = ocupados['AGLOMERADO'].map(dicc_aglo)
+
 # 1. No respuesta por aglomerado
-nr_aglo = ocupados.groupby('AGLOMERADO').apply(
+nr_aglo = ocupados.groupby('NOMBRE_AGLO').apply(
     lambda x: (len(x[x['P21'] == -9]) / len(x)) * 100
 ).rename("Tasa No Respuesta (%)")
 print(nr_aglo.round(2))
 
-# 2. Mediana de ingresos válidos por aglomerado
-ingresos_aglo = ocupados[ocupados['P21'] > 0].groupby('AGLOMERADO')['P21'].median().rename("Mediana Ingreso Nominal")
+# 2. Mediana de ingresos válidos nominales por aglomerado
+ingresos_aglo = ocupados[ocupados['P21'] > 0].groupby('NOMBRE_AGLO')['P21'].median().rename("Mediana Ingreso Nominal")
 print("\n", ingresos_aglo)
 
 # --- VISUALIZACIÓN ---
