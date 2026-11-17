@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 carpeta_bases = "./Bases_EPH"
-aglomerados_elegidos = [33, 13] 
+aglomerados_elegidos = [32, 2]
 cols_to_keep = [
     'ANO4', 'TRIMESTRE', 'AGLOMERADO', 'ESTADO', 
     'P21', 'P47T', 'CH04', 'CH06', 'NIVEL_ED', 
